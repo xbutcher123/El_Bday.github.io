@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! ✨</title>
+    <style>
+        /* Base Styling & Pastel Background Animation */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Comic Sans MS', 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- CUTE POP IN / POP OUT FRAMES --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 550px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cute-card {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 3rem 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 107, 129, 0.2);
+            backdrop-filter: blur(15px);
+            border: 4px solid #fff;
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Active State (Pop In) */
+        .cute-card.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Dismissed State (Pop Out) */
+        .cute-card.pop-out {
+            transform: scale(0) rotate(-10deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- LOGIN PORTAL STYLING --- */
+        .login-title {
+            color: #ff6b81;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            color: #ff7675;
+            font-weight: bold;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+            padding-left: 0.5rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #ffeaa7;
+            border-radius: 15px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .input-group input:focus {
+            border-color: #ff6b81;
+        }
+
+        .login-btn {
+            background: #ff6b81;
+            color: white;
+            border: none;
+            padding: 0.8rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+            transition: transform 0.2s, background 0.2s;
+            font-family: inherit;
+            margin-top: 0.5rem;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.05);
+            background: #ff4757;
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-weight: bold;
+            height: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Wrong Password Shake Animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        /* --- MAIN BIRTHDAY CONTENT STYLING --- */
+        h1 {
+            font-size: 3rem;
+            color: #ff6b81;
+            margin: 0 0 1rem 0;
+            animation: floatText 3s ease-in-out infinite;
+        }
+
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Long Sweet Message Formatting */
+        .long-message {
+            font-size: 1.1rem;
+            color: #57606f;
+            line-height: 1.8;
+            text-align: justify;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+            margin-top: 1.5rem;
+        }
+
+        /* Custom Scrollbar for the message */
+        .long-message::-webkit-scrollbar {
+            width: 6px;
+        }
+        .long-message::-webkit-scrollbar-thumb {
+            background-color: #ffb8b8;
+            border-radius: 10px;
+        }
+
+        .heart {
+            color: #ff4757;
+            display: inline-block;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* --- FLOATING BALLOONS --- */
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 60px;
+            height: 75px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            z-index: 1;
+            opacity: 0.8;
+            animation: floatUp 12s linear infinite;
+        }
+
+        .balloon::after {
+            content: "▲";
+            position: absolute;
+            bottom: -8px;
+            left: 24px;
+            font-size: 8px;
+            color: inherit;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+        }
+
+        #confetti-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="container">
+        
+        <!-- STEP 1: CUTE LOGIN PORTAL (ACTIVITY LOG) -->
+        <div class="cute-card active" id="loginCard">
+            <h2 class="login-title">🎂 Celebrant Log-In 🎂</h2>
+            
+            <div class="input-group">
+                <label for="celebrantName">Your Lovely Name:</label>
+                <input type="text" id="celebrantName" placeholder="e.g., Hannah" autocomplete="off">
+            </div>
+            
+            <div class="input-group">
+                <label for="celebrantDob">Date of Birth (Password):</label>
+                <input type="date" id="celebrantDob">
+            </div>
+            
+            <button class="login-btn" onclick="verifyCelebrant()">Unlock My Day ✨</button>
+            <div class="error-message" id="errorMessage">Oops! That's not right, try again! 💕</div>
+        </div>
+
+        <!-- STEP 2: MAIN BIRTHDAY PAGE (POPS IN LATER) -->
+        <div class="cute-card" id="birthdayCard">
+            <h1>HAPPY Birthday! 🎉</h1>
+            
+            <div class="long-message">
+                <p>Dearest Birthday Girl, <span class="heart">♥</span></p>
+                <p>Today is all about celebrating the wonderful, radiant, and absolutely beautiful person that you are. From the moment you logged into this little corner of the internet, I wanted to make sure you felt just how incredibly special and cherished you are by everyone around you.</p>
+                
+                <p>May this brand-new chapter of your life bring you endless pockets of joy, cozy moments, laughter that makes your stomach hurt, and the strength to chase every single dream resting in your heart. You have this magical way of brightening up the world just by being yourself, and today, the universe is smiling right back at you.</p>
+                
+                <p>Eat an extra slice of cake, dance around your room, soak up all the love, and remember that you deserve the absolute best today and every single day after. Thank you for being such a sweet gift to this world!</p>
+                
+                <p style="text-align: center; font-weight: bold; color: #ff6b81; margin-top: 2rem;">Happiest Birthday to You! 🎂✨🥳</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- CONFIGURATION: CHANGE TARGET ANSWER HERE ---
+        // Put the expected name (lowercase) and exact birthdate password here
+        const CORRECT_NAME = "el"; 
+        const CORRECT_DOB = "2002-06-03"; // Format: YYYY-MM-DD
+
+        // --- PASSWORD VALIDATION & ANIMATION LOGIC ---
+        function verifyCelebrant() {
+            const inputName = document.getElementById('celebrantName').value.trim().toLowerCase();
+            const inputDob = document.getElementById('celebrantDob').value;
+            const loginCard = document.getElementById('loginCard');
+            const birthdayCard = document.getElementById('birthdayCard');
+            const errorMsg = document.getElementById('errorMessage');
+
+            if (inputName === CORRECT_NAME && inputDob === CORRECT_DOB) {
+                // 1. Success! Hide error message
+                errorMsg.style.opacity = "0";
+                
+                // 2. Pop-out login card
+                loginCard.classList.remove('active');
+                loginCard.classList.add('pop-out');
+                
+                // 3. Wait for pop-out animation to finish, then Pop-in the Birthday card
+                setTimeout(() => {
+                    birthdayCard.classList.add('active');
+                    // Huge burst of celebration confetti!
+                    triggerMassiveConfetti();
+                }, 500);
+
+            } else {
+                // Wrong password: Apply shake animation and display error
+                loginCard.classList.add('shake');
+                errorMsg.style.opacity = "1";
+                
+                // Clear the shake class so it can be re-triggered
+                setTimeout(() => {
+                    loginCard.classList.remove('shake');
+                }, 500);
+            }
+        }
+
+        // --- BALLOON ENGINE ---
+        const balloonColors = ['#ff869a', '#afe3ff', '#fff3a8', '#b3f5bc', '#dfb3ff'];
+        
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            const randomColor = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+            balloon.style.backgroundColor = randomColor;
+            balloon.style.color = randomColor; 
+            balloon.style.left = Math.random() * 100 + 'vw';
+            
+            const sizeMultiplier = 0.6 + Math.random() * 0.8; 
+            balloon.style.transform = `scale(${sizeMultiplier})`;
+            
+            const duration = 8 + Math.random() * 6;
+            balloon.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(balloon);
+            setTimeout(() => { balloon.remove(); }, duration * 1000);
+        }
+        setInterval(createBalloon, 1800);
+
+        // --- CONFETTI SYSTEM ---
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class ConfettiParticle {
+            constructor(x, y, speedX, speedY) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 7 + 4;
+                this.color = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+                this.speedX = speedX || Math.random() * 10 - 5;
+                this.speedY = speedY || Math.random() * -10 - 5;
+                this.gravity = 0.2;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 6 - 3;
+                this.opacity = 1;
+            }
+            update() {
+                this.speedY += this.gravity;
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotationSpeed;
+                this.opacity -= 0.01;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function triggerMassiveConfetti() {
+            // Shoots multiple waves from the sides and center
+            const W = canvas.width;
+            const H = canvas.height;
+            
+            // Left burst
+            for(let i=0; i<40; i++) particles.push(new ConfettiParticle(0, H, Math.random()*12 + 5, Math.random()*-15 - 10));
+            // Right burst
+            for(let i=0; i<40; i++) particles.push(new ConfettiParticle(W, H, Math.random()*-12 - 5, Math.random()*-15 - 10));
+            // Center burst
+            for(let i=0; i<50; i++) particles.push(new ConfettiParticle(W/2, H/2));
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles = particles.filter(p => p.opacity > 0);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
