@@ -155,22 +155,22 @@
             <div class="input-group">
                 <label for="username">Username:</label>
                 <div class="input-guide">Hint: Your short nickname</div>
-                <input type="text" id="username" placeholder="e.g., el" autocomplete="off">
+                <input type="text" id="username" placeholder="e.g., primo" autocomplete="off">
             </div>
             
             <div class="input-group">
                 <label for="password">Password (Birthdate):</label>
-                <div class="input-guide">Required Format: YYYY-MM-DD (e.g., 2002-06-03)</div>
+                <div class="input-guide">Required Format: YYYY-MM-DD (e.g., 2001-04-10)</div>
                 <input type="text" id="password" placeholder="YYYY-MM-DD" maxlength="10">
             </div>
             
             <button class="action-btn" onclick="checkCredentials()">Login & Play 🎮</button>
-            <div class="error-message" id="loginError">Access denied. Double check credentials! 💕</div>
+            <div class="error-message" id="loginError">Aguy, nakalimot naka sa imong name og birthdate?💕</div>
         </div>
 
         <div class="cute-card" id="cardGame">
-            <h2 style="color: #ff6b81; margin: 0 0 10px 0;">The Adventure of El 👑</h2>
-            <p style="font-size: 0.85rem; color: #778ca3; margin: 0 0 10px 0;">Help <strong>Lyndel</strong> bump all 3 blocks using keyboard controls or mobile screen layout!</p>
+            <h2 style="color: #ff6b81; margin: 0 0 10px 0;">The Adventure of Lyndel 👑</h2>
+            <p style="font-size: 0.85rem; color: #778ca3; margin: 0 0 10px 0;"><strong>Molly:</strong> Ipakog imong uli dinha sa box bai kanang mura kag si mario ba</p>
             
             <div class="game-wrapper">
                 <canvas id="marioCanvas" width="500" height="200"></canvas>
@@ -184,18 +184,18 @@
                 <div class="d-btn jump-btn" id="btnJump">JUMP</div>
             </div>
 
-            <div class="message-bubble" id="msgBox0"><strong>Box #1 discovered:</strong> Happy Birthday Lyndel! Today is code-named to celebrate the incredible energy and beautiful light you bring into our lives.</div>
-            <div class="message-bubble" id="msgBox1"><strong>Box #2 discovered:</strong> May this stunning lap around the sun yield endless smiles, comforting spaces, safe environments, and exciting new milestones.</div>
-            <div class="message-bubble" id="msgBox2"><strong>Box #3 discovered:</strong> You deserve the absolute world, cake slices without limits, and love pouring in from every single horizon!</div>
+            <div class="message-bubble" id="msgBox0"><strong>Molly:</strong> Roses are Red, Violets are blue, ikaw ra ako wala nay number two</div>
+            <div class="message-bubble" id="msgBox1"><strong>Molly:</strong> Naks, kabalo man diay ka mo Jump pero nganong ako man ang na-fall nimo</div>
+            <div class="message-bubble" id="msgBox2"><strong>Molly:</strong> Please lang ayaw pakusga ang hangin aron dili ka mapalid sa lain</div>
 
             <div style="margin-top: 20px; display: none;" id="puzzleUnlockArea">
-                <button class="action-btn" style="background:#54a0ff;" onclick="transitionToPuzzle()">Solve the Puzzle ➔</button>
+                <button class="action-btn" style="background:#54a0ff;" onclick="transitionToPuzzle()">Pindota ni bai  ➔</button>
             </div>
         </div>
 
         <div class="cute-card" id="cardPuzzle">
-            <h2 style="color: #2e86de; margin-top: 0;">💧 Synthesis Puzzle: Element Formulation</h2>
-            <p style="color: #57606f; font-size: 0.95rem;">Drag and drop atoms from the resource pool into the reactor framework below to build a molecule of life: **Water** ($H_2O$)!</p>
+            <h2 style="color: #2e86de; margin-top: 0;">💧 LYNDEL LITTLE ADVENTURE</h2>
+            <p style="color: #57606f; font-size: 0.95rem;"><strong>Scenario:</strong> Gi uhaw si <strong>Molly</strong> need niya og tubig. Tabangi siya para maka-create ka og water using the chemFormula</p>
             
             <div class="formula-display">Current compound state: <span id="chemFormula">---</span></div>
 
@@ -205,6 +205,7 @@
                     <div class="atom-pool" id="poolZone" ondragover="allowDrop(event)" ondrop="handleDrop(event)">
                         <div class="atom hydrogen" id="h1" draggable="true" ondragstart="handleDrag(event)">H</div>
                         <div class="atom hydrogen" id="h2" draggable="true" ondragstart="handleDrag(event)">H</div>
+                        <div class="atom oxygen" id="o1" draggable="true" ondragstart="handleDrag(event)">O</div>
                         <div class="atom oxygen" id="o1" draggable="true" ondragstart="handleDrag(event)">O</div>
                     </div>
                 </div>
@@ -219,22 +220,27 @@
         </div>
 
         <div class="cute-card" id="cardFinal">
-            <h1 style="font-size: 2.5rem; margin-top: 0;">Unconditional Success! 🎉</h1>
-            <h3 style="color:#ff6b81; margin-top:-10px;">Happiest Birthday, Lyndel! 💖</h3>
+            <h1 style="font-size: 2.5rem; margin-top: 0;">Yehey, ka-bright jud oyy!🎉</h1>
+            <h3 style="color:#ff6b81; margin-top:-10px;">MESSAGE FROM: MOLLY💖</h3>
             
             <div class="final-scroll">
                 <p>Dearest Lyndel,</p>
-                <p>You did it! You unlocked the blocks, synthesized the elemental foundation of life, and arrived safely at your destination. This entire game interface was constructed with love to remind you how wonderfully special and valuable you are.</p>
-                <p>Just like water, you are a refreshing, life-giving, and essential presence to everyone lucky enough to know you. Your strength, kindness, and beauty flow effortlessly, making the world brighter wherever you step.</p>
-                <p>May your brand-new chapter be painted with bright colors, magical real-world adventures, massive achievements, and genuine moments of pure delight. Keep shining, dreaming big, and being the wonderful person that you are!</p>
-                <p style="text-align: center; font-weight: bold; color: #ff6b81; font-size: 1.2rem; margin-top: 2rem;">Cheers to your best year yet! 🥂✨🍰</p>
+                <p>I've known you for weeks now, but I have not known what you like, things you dislike, what makes you laugh, and what makes you frustrated. There are many things that I don't know about you; I'm curious about you.</p>
+                <p>I want to spend my time with you—every second on the clock with you. I might sound greedy, but I really want you, El. The things I like about you are that you're easy to talk to, humorous, funny, and understanding. You are an intelligent woman who reflects on her actions and accepts when she makes mistakes. You're open to being corrected and are never ashamed of it.
+You know your priorities, and you understand your limitations. And that is what makes El, El.
+</p>
+                <p>From the short time we've shared together, I've seen enough of who you are to be certain of one thing:
+
+<strong><i>"I love you, Lydel."</strong>
+</p>
+                <p style="text-align: center; font-weight: bold; color: #ff6b81; font-size: 1.2rem; margin-top: 2rem;">HAPPY BIRTHDAY, LYNDEL 🥂✨🍰</p>
             </div>
         </div>
 
     </div>
 
     <script>
-        const USERNAME_TARGET = "el";
+        const USERNAME_TARGET = "lyndel";
         const PASSWORD_TARGET = "2002-06-03"; 
 
         function navigateTo(targetId) {
